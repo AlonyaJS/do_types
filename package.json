@@ -1,22 +1,23 @@
 {
-  "name": "resource_name",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "clean": "rimraf dist",
-    "build:ts": "tsc",
-    "build:web": "cpy \"src/web/index.html\" \"src/web/style.css\" dist/web --flat",
-    "build": "run-s clean build:ts build:web",
-    "watch:ts": "tsc --watch --preserveWatchOutput",
-    "watch:web": "node -e \"const fs=require('fs');const path=require('path');const out='dist/web';const files=['index.html','style.css'];const copy=()=>{fs.mkdirSync(out,{recursive:true});for(const file of files)fs.copyFileSync(path.join('src/web',file),path.join(out,file));console.log('Copied web files');};copy();for(const file of files)fs.watchFile(path.join('src/web',file),{interval:250},copy);\"",
-    "watch": "run-p watch:ts watch:web"
-  },
-  "devDependencies": {
-    "@citizenfx/client": "^2.0.29753-1",
-    "@citizenfx/server": "^2.0.29753-1",
-    "cpy-cli": "^5.0.0",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.9.3"
-  }
+	"name": "resource_name",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"clean": "rimraf dist",
+		"build:ts": "tsc",
+		"build:assets": "node -e \"const fs=require('fs');fs.cpSync('src','dist',{recursive:true,filter:(src)=>!src.endsWith('.ts')&&!src.endsWith('.tsx')&&!src.endsWith('.d.ts')});\"",
+		"build": "run-s clean build:ts build:assets",
+		"watch:ts": "tsc --watch --preserveWatchOutput",
+		"watch:assets": "node -e \"const fs=require('fs');const copy=()=>{fs.cpSync('src','dist',{recursive:true,filter:(src)=>!src.endsWith('.ts')&&!src.endsWith('.tsx')&&!src.endsWith('.d.ts')});console.log('Copied assets from src to dist');};copy();fs.watch('src',{recursive:true},copy);\"",
+		"watch": "run-p watch:ts watch:assets"
+	},
+	"devDependencies": {
+		"@citizenfx/client": "^2.0.29753-1",
+		"@citizenfx/server": "^2.0.29753-1",
+		"cpy-cli": "^5.0.0",
+		"npm-run-all": "^4.1.5",
+		"rimraf": "^6.0.1",
+		"typescript": "^5.9.3"
+	}
 }
+
