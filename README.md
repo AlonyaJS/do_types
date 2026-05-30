@@ -7,6 +7,7 @@ Simple reusable TypeScript boilerplate for FiveM resources.
 Run:
 
 ```bash
+cd -LiteralPath 'D:\Fivem\txData\FiveMBasicServerCFXDefault_0CD946.base\resources\[dayone]'
 npm install
 npm run build
 ```
