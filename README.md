@@ -4,10 +4,16 @@ Simple reusable TypeScript boilerplate for FiveM resources.
 
 ## Usage
 
-Run:
+clone:
 
 ```bash
 cd -LiteralPath 'D:\Fivem\txData\FiveMBasicServerCFXDefault_0CD946.base\resources\[dayone]'
+git clone https://github.com/AlonyaJS/do_types.git resource_name
+```
+
+Run:
+
+```bash
 npm install
 npm run build
 ```
